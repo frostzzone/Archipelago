@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from rule_builder.options import OptionFilter
 from BaseClasses import Item, ItemClassification
 
 if TYPE_CHECKING:
@@ -14,24 +15,34 @@ from .data import levels_list, game_name
 
 STARTING_ITEM = ""
 ITEM_NAME_TO_ID = {}
+ITEM_ID_TO_NAME = {}
 DEFAULT_ITEM_CLASSIFICATIONS = {}
 
-def create_item_list(world: BeatblockWorld) -> None:
+print(OptionFilter(Fishsanity, False))
+
+def add_item(name: str, item_id: int, classification: ItemClassification = ItemClassification.progression) -> None:
+    ITEM_NAME_TO_ID[name] = item_id
+    ITEM_ID_TO_NAME[item_id] = name
+    DEFAULT_ITEM_CLASSIFICATIONS[name] = classification
+
+def create_item_list() -> None:
+    add_item("A Beat maybe a block", 10, ItemClassification.filler)
+
     counter = 100
-    # Levels :3
     for i, item in enumerate(levels_list):
-        ITEM_NAME_TO_ID[item] = counter
-        DEFAULT_ITEM_CLASSIFICATIONS[item] = ItemClassification.progression
+        add_item(item, counter)
         counter += 1
+    
+    add_item("Fishing Rod", counter)
+    counter += 1
 
-def create_item_list_add_fish(world: BeatblockWorld) -> None:
-    counter = 100 + len(levels_list)
-    # Fish :drool:
-    if world.options.fishsanity.value:
-        ITEM_NAME_TO_ID["Fishing Rod"] = counter
-        DEFAULT_ITEM_CLASSIFICATIONS["Fishing Rod"] = ItemClassification.progression
-        counter += 1
+# def create_item_list_add_fish(world: BeatblockWorld) -> None:
+#     counter = 100 + len(levels_list)
+#     # Fish :drool:
+#     if world.options.fishsanity.value:
+        
 
+create_item_list()
 
 # Add costumes here i guess
 
@@ -49,16 +60,17 @@ def create_item_with_correct_classification(world: BeatblockWorld, name: str) ->
     return BeatblockItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
 def create_all_items(world: BeatblocktWorld) -> None:
-    create_item_list(world)
-
     STARTING_ITEM = world.random.choice(levels_list)
-
-    create_item_list_add_fish(world)
 
     itempool: list[Item] = []
 
     starting_item = None
     for item in ITEM_NAME_TO_ID:
+        # Ignore fishing rod if fishsanity is off
+        if not world.options.fishsanity.value and item == "Fishing Rod":
+            print("skipping fishing rod")
+            continue
+
         if item == STARTING_ITEM:
             starting_item = world.create_item(item)
             world.push_precollected(starting_item)

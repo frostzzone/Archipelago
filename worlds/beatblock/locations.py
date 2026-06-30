@@ -14,6 +14,8 @@ from .options import Ranksanity, TargetRank, Fishsanity
 # Replace amount_of_fish with actual fish_list when it is implemented
 from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish
 
+# TODO: REWITE everything to be registered no matter what
+
 # TODO: Add customizable completion condition
 VICTORY_LOCATION = "Era Chimaera"
 
@@ -21,8 +23,11 @@ VICTORY_LOCATION = "Era Chimaera"
 level_dict: dict[str, list[str]] = {} # { location_name: [ Check, Check, ...]}
 fish_locations = []
 LOCATION_TO_ID = {}
+# for simplicity on the client side
+ID_TO_LOCATION = {}
 
 def create_location_list(world: BeatblockWorld) -> None:
+    print("Goal Level: ", levels_list[world.options.goal_level.value])
     counter = 1100
     # Levels
     for loc in levels_list:
@@ -38,11 +43,13 @@ def create_location_list(world: BeatblockWorld) -> None:
                 location_name = f"{loc} Get {rank} Rank"
                 level_dict[loc].append(location_name)
                 LOCATION_TO_ID[location_name] = counter
+                ID_TO_LOCATION[counter] = location_name
                 counter += 1
         else:
             location_name = f"{loc} Get {ranks_list[world.options.target_rank.value]} Rank"
             level_dict[loc] = [location_name]
             LOCATION_TO_ID[location_name] = counter
+            ID_TO_LOCATION[counter] = location_name
             counter += 1
 
     # Fish
@@ -51,6 +58,7 @@ def create_location_list(world: BeatblockWorld) -> None:
             location_name = f"Catch {i} Fish"
             fish_locations.append(location_name)
             LOCATION_TO_ID[location_name] = counter
+            ID_TO_LOCATION[counter] = location_name
             counter += 1
 
         # replace amount_of_fish function with this when fish_list is implemented
@@ -71,6 +79,8 @@ def create_all_locations(world: BeatblockWorld) -> None:
     create_location_list(world)
     create_regular_locations(world)
     create_events(world)
+
+    print(ID_TO_LOCATION)
 
 def create_regular_locations(world: BeatblockWorld) -> None:
     game_region = world.get_region(origin_region)

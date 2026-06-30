@@ -1,9 +1,29 @@
 from dataclasses import dataclass
 
 from schema import Schema, Optional
-from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle, OptionDict, Visibility
+from Options import Choice, TextChoice, OptionGroup, PerGameCommonOptions, Range, Toggle, OptionDict, Visibility
 
-from .data import levels_list
+from .data import levels_list, ranks_list
+
+
+def make_dynamic_choice(class_name, options, display_name="unset", default=0, doc = """I forgor to set this please tell me"""):
+    choice_attributes = {
+        "__doc__": doc,
+        "display_name": display_name,
+    }
+
+    for i, option in enumerate(options):
+        choice_attributes[f"option_{option.replace(' ', '_')}"] = i
+        if option == default:
+            choice_attributes["default"] = i
+
+    return type(class_name, (Choice,), choice_attributes)
+
+class DeathLink(Toggle):
+    """
+    When you die, everyone who enabled death link dies. Of course, the reverse is true too.
+    """
+    display_name = "Death Link"
 
 class Fishsanity(Toggle):
     """
@@ -21,31 +41,15 @@ class Ranksanity(Toggle):
 
     display_name = "Ranksanity"
 
-class TargetRank(Choice):
-    """
-    The target rank for checks
-    """
 
-    display_name = "Target Rank"
+TargetRank = make_dynamic_choice("TargetRank", ranks_list, "Target Rank", "S", """
+The minimum target rank for checks
+Will be ignored if ranksanity is on
+""")
 
-    option_P = 0
-    option_S_Plus = 1
-    option_S = 2
-    option_A_Plus = 3
-    option_A = 4
-    option_B_Plus = 5
-    option_B = 6
-    option_B_Minus = 7
-    option_C_Plus = 8
-    option_C = 9
-    option_C_Minus = 10
-    option_D_Plus = 11
-    option_D = 12
-    option_D_Minus = 13
-    option_F = 14
-
-    # Choice options must define an explicit default value.
-    default = option_S
+GoalLevel = make_dynamic_choice("GoalLevel", levels_list, "Goal Level", "Era Chimaera", """
+The final level needed before go Mode
+""")
 
 class CustomLevels(OptionDict):
     """
@@ -61,23 +65,34 @@ class CustomLevels(OptionDict):
 
 @dataclass
 class BeatblockOptions(PerGameCommonOptions):
+    deathlink: DeathLink
     fishsanity: Fishsanity
     ranksanity: Ranksanity
     target_rank: TargetRank
+    goal_level: GoalLevel
     custom_levels: CustomLevels
 
 option_groups = [
         OptionGroup(
             "Gameplay Options",
-            [TargetRank, Ranksanity, Fishsanity],
+            [DeathLink, TargetRank, GoalLevel, Ranksanity, Fishsanity],
         )
 ]
 
 option_presets = {
     "default": {
+        "deathlink": False,
         "fishsanity": False,
         "ranksanity": False,
-        "target_rank": TargetRank.option_S,
-        "custom_levels": {}
+        "target_rank": "s",
+        "goal_level": "era_chimaera",
+        "custom_levels": {
+            "#comment": "Not implemented yet",
+            "#comment2": "any level with a # in front of it will be ignored",
+            "#shown_name": {
+                "folder":"level_folder",
+                "workshop": False
+            }
+        }
     }
 }

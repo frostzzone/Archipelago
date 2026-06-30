@@ -2,6 +2,7 @@ game_name = "Beatblockapelago"
 
 origin_region = "game"
 
+# Case sensitive to the ingame one
 levels_list = [
     # Tutorial Atom
     "Tutorial",
@@ -61,13 +62,109 @@ levels_list = [
     "gone fishin'"
 ]
 
-# costumes_list = [
-#     "Pirate"
-# ]
+costumes_list = [
+	# "random",
+	# "none",
+	"tophat",
+	"pirate",
+	"dogears",
+	"chefhat",
+	"gearshift",
+	"jolly",
+	"jester",
+
+	"gradcap",
+	"origami",
+	"catears",
+	"square",
+	
+	"mine",
+	"cowboy",
+	"antispiralglasses",
+	
+	"antennae",
+	"triangle",
+	"spike",
+	
+	"bricks",
+	"bunny",
+	"inverted",
+
+	"huxley",
+	"construction",
+	"shades",
+	"antique",
+	
+	"lawrence",
+	"invisible",
+	"stache",
+	"bulb",
+	"cloudy",
+	"novena",
+	
+	"crown",
+	"blob",
+	"fedora",
+	"atom",
+	
+	"samurai",
+	"2p5d",
+	"ribbon",
+	"heptagramme",
+	"jimspim",
+	"0ssembli",
+	"rfandf"
+]
 
 # TODO: Add fish
-# fish_list = [
-# ]
+fish_list = [
+    "blockjaw",
+    "heeld",
+    "puffermine",
+    "hammerside",
+    "inversalmon",
+    "burbounce",
+    "tutorbass",
+    "cubelacanth",
+    "catgirlfish",
+    "armorana",
+    "staticback",
+    "gritgill",
+    "blowafish",
+    "allstarfish",
+    "ladybug",
+    "goldfish",
+    "sheatrock",
+    "signyfin",
+    "orangeoarchid",
+    "selfish",
+    "sharpen",
+    "suckerphish",
+    "proofofperchase",
+    "bebocaccio",
+    "ditheredfish",
+    "pianosesolphin",
+    "bonesfish",
+    "gearstropod",
+    "deepcsmelt",
+    "sunnyfish",
+    "twofish",
+    "stringfish",
+    "seaplane",
+    "teradon",
+    "lefisheauchocolat",
+    "falsechimaera",
+    "codefish",
+    "homerudd",
+    "unbelugable",
+    "turntadpole",
+    "wholelobster",
+    "groovecroakster",
+    "guitarherring",
+    "beatmantaray",
+    "playdart",
+    "jazzy"
+]
 
 ranks_list = [
     "P",
@@ -87,7 +184,9 @@ ranks_list = [
     "F",
 ]
 
-amount_of_fish = 46
+amount_of_costumes = len(costumes_list)
+
+amount_of_fish = len(fish_list)
 
 amount_of_levels = len(levels_list)
 
