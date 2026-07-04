@@ -18,8 +18,6 @@ ITEM_NAME_TO_ID = {}
 ITEM_ID_TO_NAME = {}
 DEFAULT_ITEM_CLASSIFICATIONS = {}
 
-print(OptionFilter(Fishsanity, False))
-
 def add_item(name: str, item_id: int, classification: ItemClassification = ItemClassification.progression) -> None:
     ITEM_NAME_TO_ID[name] = item_id
     ITEM_ID_TO_NAME[item_id] = name

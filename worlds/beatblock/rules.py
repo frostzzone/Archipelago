@@ -7,7 +7,7 @@ from rule_builder.rules import Has, HasAll, Rule
 
 from .data import origin_region, levels_list
 
-from .locations import level_dict, fish_locations, VICTORY_LOCATION
+from .locations import level_dict, fish_locations
 
 #from .options import HardMode
 
@@ -34,11 +34,15 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
 
     ### Level dictionary
     # { item_name: [ location, location, ...]}
+    # print("Levels: ", level_dict)
+    victory_location = levels_list[world.options.goal_level.value]
+
     for level_name, level_locations in level_dict.items():
         level_unlocked = Has(level_name)
         for location_name in level_locations:
             location = world.get_location(location_name)
             # world.set_rule(location, level_unlocked)
+
             world.set_rule(
                 location,
                 lambda state, level=level_name: state.has(level, world.player)
@@ -50,9 +54,9 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
             location = world.get_location(location_name)
             world.set_rule(location, Has("Fishing Rod"))
 
-    can_complete_game = Has(VICTORY_LOCATION)
+    can_complete_game = Has(victory_location)
 
-    final_level = world.get_location(VICTORY_LOCATION + " (B- or Above)")
+    final_level = world.get_location(victory_location + " (B- or Above)")
     world.set_rule(final_level, can_complete_game)
 
 def set_completion_condition(world: BeatblockWorld) -> None:

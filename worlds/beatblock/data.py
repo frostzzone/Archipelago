@@ -38,6 +38,7 @@ levels_list = [
     
     # Challenge Atom
     "Lawrence",
+    "Heated Battle! ~ Disco Bakery",
     "C-ミ B-ミ",
     "Omelette Cafe By Road 38",
     "cloud factory",
@@ -57,6 +58,7 @@ levels_list = [
     "Empty Diary",
     "Spin Cycle",
     "heptagramme",
+    "Recollection (ft. Risa Kodaka)",
     
     # Freeplay
     "gone fishin'"

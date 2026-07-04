@@ -52,12 +52,6 @@ class BeatblockWorld(World):
         return self.fill_json_data()
     
     def fill_json_data(self) -> Mapping[str, Any]:
-        print(self.location_name_to_id)
-        print(self.item_name_to_id)
-
-        self.location_name_to_id = locations.LOCATION_TO_ID
-        self.item_name_to_id = items.ITEM_NAME_TO_ID
-
         # Get of the custom levels here ig
 
         base_data = {
