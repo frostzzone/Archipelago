@@ -25,15 +25,14 @@ def add_item(name: str, item_id: int, classification: ItemClassification = ItemC
 
 def create_item_list() -> None:
     add_item("A Beat maybe a block", 10, ItemClassification.filler)
+    add_item("Fishing Rod", 11, ItemClassification.progression)
 
     counter = 100
     for i, item in enumerate(levels_list):
         add_item(item, counter)
         counter += 1
-    
-    add_item("Fishing Rod", counter)
-    counter += 1
 
+# NO FISH ITEM STUPID ME
 # def create_item_list_add_fish(world: BeatblockWorld) -> None:
 #     counter = 100 + len(levels_list)
 #     # Fish :drool:

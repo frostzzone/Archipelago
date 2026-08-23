@@ -60,7 +60,7 @@ class BeatblockWorld(World):
             "fishsanity": bool(self.options.fishsanity),
             "ranksanity": bool(self.options.ranksanity),
             "target_rank": self.options.target_rank.value,
-            "locations": json.dumps(locations.ID_TO_LOCATION),
+            "locations": json.dumps(locations.LOCATION_TO_ID),
             "items": json.dumps(items.ITEM_ID_TO_NAME),
             # "custom_levels": self.options.custom_levels,
         }
