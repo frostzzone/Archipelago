@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .world import BeatblockWorld
 
 from .options import Fishsanity
-from .data import levels_list, game_name
+from .data import levels_list, game_name, atom_list, GAME
 
 STARTING_ITEM = ""
 ITEM_NAME_TO_ID = {}
@@ -23,14 +23,37 @@ def add_item(name: str, item_id: int, classification: ItemClassification = ItemC
     ITEM_ID_TO_NAME[item_id] = name
     DEFAULT_ITEM_CLASSIFICATIONS[name] = classification
 
+def add_key(name: str, item_id: int) -> None:
+    ITEM_NAME_TO_ID[name] = item_id
+    ITEM_ID_TO_NAME[item_id] = name
+    DEFAULT_ITEM_CLASSIFICATIONS[name] = ItemClassification.progression
+
+
 def create_item_list() -> None:
     add_item("A Beat maybe a block", 10, ItemClassification.filler)
     add_item("Fishing Rod", 11, ItemClassification.progression)
 
-    counter = 100
-    for i, item in enumerate(levels_list):
-        add_item(item, counter)
-        counter += 1
+    # # IJM LAZY
+    level_counter = 100
+    atom_counter = 1000
+
+    for atom in GAME:
+        add_key(atom + " Key", atom_counter)
+        atom_counter += 1
+        # BLAHAAHGAHJAJA
+        for item in GAME[atom]:
+            add_item(item, level_counter)
+            level_counter += 1
+
+    # counter = 100
+    # for i, item in enumerate(levels_list):
+    #     add_item(item, counter)
+    #     counter += 1
+    
+    # counter = 1000
+    # for i, item in enumerate(atom_list):
+    #     add_item(item, counter)
+    #     counter += 1
 
 # NO FISH ITEM STUPID ME
 # def create_item_list_add_fish(world: BeatblockWorld) -> None:
@@ -61,6 +84,9 @@ def create_all_items(world: BeatblocktWorld) -> None:
 
     itempool: list[Item] = []
 
+    if world.options.fishsanity.value:
+        world.push_precollected(world.create_item("Fishing Rod"))
+
     starting_item = None
     for item in ITEM_NAME_TO_ID:
         # Ignore fishing rod if fishsanity is off
@@ -72,6 +98,7 @@ def create_all_items(world: BeatblocktWorld) -> None:
             starting_item = world.create_item(item)
             world.push_precollected(starting_item)
             continue
+
         itempool.append(world.create_item(item))
     
     number_of_items = len(itempool)

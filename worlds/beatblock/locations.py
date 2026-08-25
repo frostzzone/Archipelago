@@ -13,13 +13,13 @@ if TYPE_CHECKING:
 from .options import Ranksanity, TargetRank, Fishsanity
 
 # Replace amount_of_fish with actual fish_list when it is implemented
-from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish
+from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish, GAME
 
 # Buh, levles
-level_dict: dict[str, list[str]] = {} # { location_name: [ Check, Check, ...]}
+level_dict = {} # { location_name: { atom_name: "BLAH" , checks: [ Check, Check, ...]}}
 
 # Every location registered
-rank_locations: list[str] = []
+rank_locations = {}
 fish_locations: list[str] = []
 
 LOCATION_TO_ID = {}
@@ -29,15 +29,34 @@ ID_TO_LOCATION = {}
 def create_location_list() -> None:
     counter = 1100
     # Levels
-    for loc in levels_list:
-         # Rank checks
-        for rank in ranks_list:
-            location_name = f"{loc} Get {rank} Rank"
-            rank_locations.append(location_name)
+    
+    for atom in GAME:
+        for loc in GAME[atom]:
+            rank_locations[loc] = { "atom": atom, "level": loc, "ranks": [] }
 
-            LOCATION_TO_ID[location_name] = counter
-            ID_TO_LOCATION[counter] = location_name
-            counter += 1
+            # Rank checks
+            for rank in ranks_list:
+                location_name = f"{loc} Get {rank} Rank"
+
+                # print(rank_locations[loc]["ranks"])
+
+                rank_locations[loc]["ranks"].append(location_name)
+
+                LOCATION_TO_ID[location_name] = counter
+                ID_TO_LOCATION[counter] = location_name
+                counter += 1
+    
+
+
+    # for loc in levels_list:
+    #      # Rank checks
+    #     for rank in ranks_list:
+    #         location_name = f"{loc} Get {rank} Rank"
+    #         rank_locations.append(location_name)
+
+    #         LOCATION_TO_ID[location_name] = counter
+    #         ID_TO_LOCATION[counter] = location_name
+    #         counter += 1
 
     # Fish
     for i in range(1, amount_of_fish + 1):
@@ -52,24 +71,24 @@ def create_level_locations(world: BeatblockWorld) -> None:
     target_rank = ranks_list[world.options.target_rank.value]
     victory_location = levels_list[world.options.goal_level.value]
 
-    for rank in rank_locations:
-        # if rank has victory location in the string, skip it
-        if rank.find(victory_location) != -1:
-            continue
+    for loc in rank_locations:
+        for rank in rank_locations[loc]["ranks"]:
+            # if rank has victory location in the string, skip it
+            if rank.find(victory_location) != -1:
+                continue
 
-        # Regex for location because im stupid
-        match = re.search(r"^(.*?) Get (.*?) Rank$", rank)
+            # Regex ig ues
+            match = re.search(r"^(.*?) Get (.*?) Rank$", rank)
 
-        loc = match.group(1)
-        rank_letter = match.group(2)
+            rank_letter = match.group(2)
+        
+            if not loc in level_dict:
+                level_dict[loc] = { "atom": rank_locations[loc]["atom"], "level": rank_locations[loc]["level"], "ranks": [] }
 
-        if loc not in level_dict:
-            level_dict[loc] = []
-
-        if world.options.ranksanity.value == True:
-            level_dict[loc].append(rank)
-        elif world.options.ranksanity.value == False and rank_letter == target_rank:
-            level_dict[loc].append(rank)
+            if world.options.ranksanity.value == True:
+                level_dict[loc]["ranks"].append(rank)
+            elif world.options.ranksanity.value == False and rank_letter == target_rank:
+                level_dict[loc]["ranks"].append(rank)
 
     # Fish
     # if world.options.fishsanity.value == True:
@@ -94,7 +113,7 @@ def create_regular_locations(world: BeatblockWorld) -> None:
 
     level_location_ids = {}
     for location_name, location_checks in level_dict.items():
-        location_ids = get_location_names_with_ids(location_checks)
+        location_ids = get_location_names_with_ids(location_checks["ranks"])
         level_location_ids = level_location_ids | location_ids
 
     game_region.add_locations(level_location_ids, BeatblockLocation)

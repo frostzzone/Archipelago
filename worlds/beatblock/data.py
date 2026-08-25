@@ -2,9 +2,75 @@ game_name = "Beatblockapelago"
 
 origin_region = "game"
 
+GAME = {
+    "Intro" : [
+        "Tutorial",
+        "Shinamon No Neko",
+        "Move Right Along!",
+        "so stressed!",
+        "Rhythmic Shield",
+    ],
+    "Mines" : [
+        "Through the Static",
+        "Gritted Strings",
+        "BLOW A FUSE",
+    ],
+    "Bounces" : [
+        "Night Echo (Future Funk Mix)",
+        "Ladybug Castle",
+        "Cache",
+        "BEATROCK (get it?)",
+    ],
+    "Inverses" : [
+        "Cobblestone Counterpoint",
+        "Island of Orchids",
+        "selfportrait",
+        "UNDO UNDO",
+        "ILOVEYOU.vbs",
+    ],
+    "Sides" : [
+        "publico cautivo",
+        "3-Bit Bebop",
+        "AU CONTRAIRE",
+        "Triplet Test",
+        "Destroy, Destroy (ft. eili)",
+    ],
+    "Challenge" : [
+        "Lawrence",
+        "Heated Battle! ~ Disco Bakery",
+        "C-ミ B-ミ",
+        "Omelette Cafe By Road 38",
+        "cloud factory",
+        "Fragmented Existence",
+        ":))))",
+    ],
+    "Extras" : [
+        "DAMOCLISM",
+        "+ERABY+E CONNEC+10N",
+        "NISENEN",
+        "Novena",
+        "What's a Keygen?",
+        "Era Chimaera",
+    ],
+    "Collab" : [
+        "Code Remix",
+        "Lucky Break",
+        "Empty Diary",
+        "Spin Cycle",
+        "heptagramme",
+        "Recollection (ft. Risa Kodaka)",
+    ],
+    # You're not allowed to tanget becasue we are EVIL
+    # "Freeplay" : [
+    #     "gone fishin'"
+    # ]
+}
+
 # Case sensitive to the ingame one
 levels_list = [
-    # Tutorial Atom
+
+    # Introspections Atom
+    
     "Tutorial",
     "Shinamon No Neko",
     "Move Right Along!",
@@ -62,7 +128,18 @@ levels_list = [
     "Recollection (ft. Risa Kodaka)",
     
     # Freeplay
-    "gone fishin'"
+    # "gone fishin'"
+]
+
+atom_list = [
+    "Tutorial",
+    "Mines",
+    "Bounces",
+    "Inverses",
+    "Sides",
+    "Challenge",
+    "Extras",
+    "Collab",
 ]
 
 costumes_list = [

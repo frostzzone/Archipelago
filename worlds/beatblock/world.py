@@ -62,6 +62,10 @@ class BeatblockWorld(World):
             "target_rank": self.options.target_rank.value,
             "locations": json.dumps(locations.LOCATION_TO_ID),
             "items": json.dumps(items.ITEM_ID_TO_NAME),
+
+            # { "intro": 1000 }
+            "atom_keys": json.dumps({"square": 1000, "mine": 1001, "bounce": 1002, "inverse": 1003, "side": 1004, "challenge": 1005, "extra": 1006, "collab": 1007}),
+
             # "custom_levels": self.options.custom_levels,
         }
 
