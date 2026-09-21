@@ -10,7 +10,7 @@ from worlds.AutoWorld import World
 from . import items, locations, regions, rules#, web_world
 from . import options as beatblock_options
 
-from .data import game_name, origin_region
+from .data import game_name, origin_region, ranks_list
 
 class BeatblockWorld(World):
     """
@@ -59,7 +59,7 @@ class BeatblockWorld(World):
             "death_link": bool(self.options.deathlink),
             "fishsanity": bool(self.options.fishsanity),
             "ranksanity": bool(self.options.ranksanity),
-            "target_rank": self.options.target_rank.value,
+            "target_rank": ranks_list[self.options.target_rank.value],
             "locations": json.dumps(locations.LOCATION_TO_ID),
             "items": json.dumps(items.ITEM_ID_TO_NAME),
 

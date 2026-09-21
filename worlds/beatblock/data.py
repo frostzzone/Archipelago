@@ -14,6 +14,8 @@ GAME = {
         "Through the Static",
         "Gritted Strings",
         "BLOW A FUSE",
+        "Femme Fatale",
+        "Take A Number (Polished Gem Mix)",
     ],
     "Bounces" : [
         "Night Echo (Future Funk Mix)",
@@ -81,6 +83,8 @@ levels_list = [
     "Through the Static",
     "Gritted Strings",
     "BLOW A FUSE",
+    "Femme Fatale",
+    "Take A Number (Polished Gem Mix)",
     
     # Bounces Atom
     "Night Echo (Future Funk Mix)",
@@ -116,7 +120,7 @@ levels_list = [
     "+ERABY+E CONNEC+10N",
     "NISENEN",
     "Novena",
-    "What's a Keygen?",
+    "what's a keygen?", # THIS IS LOWERCASE BECAUSE STOOPID
     "Era Chimaera",
     
     # Collab Atom
@@ -247,21 +251,21 @@ fish_list = [
 ]
 
 ranks_list = [
-    "P",
-    "S Plus",
-    "S",
-    "A Plus",
-    "A",
-    "B Plus",
-    "B",
-    "B Minus",
-    "C Plus",
-    "C",
-    "C Minus",
-    "D Plus",
-    "D",
-    "D Minus",
-    "F",
+    "p",
+    "s plus",
+    "s",
+    "a plus",
+    "a",
+    "b plus",
+    "b",
+    "b minus",
+    "c plus",
+    "c",
+    "c minus",
+    "d plus",
+    "d",
+    "d minus",
+    "f",
 ]
 
 amount_of_costumes = len(costumes_list)
