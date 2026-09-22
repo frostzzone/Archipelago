@@ -84,8 +84,10 @@ def create_all_items(world: BeatblocktWorld) -> None:
 
     itempool: list[Item] = []
 
+    # TODO: RANDOMIZE THE FISHTIGNH RONGFV
     if world.options.fishsanity.value:
         world.push_precollected(world.create_item("Fishing Rod"))
+        # itempool.append(world.create_item("Fishing Rod"))
 
     starting_item = None
     for item in ITEM_NAME_TO_ID:

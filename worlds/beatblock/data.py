@@ -200,7 +200,6 @@ costumes_list = [
 	"rfandf"
 ]
 
-# TODO: Add fish
 fish_list = [
     "blockjaw",
     "heeld",

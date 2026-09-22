@@ -57,14 +57,11 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
     # NOT TODO: Add multi level completion condition ( Extra Atom Unlocks )
     # Levels location rules
 
-    # TODO: make { ATOM : { level_name: location_name } }
-
     ### Level dictionary
     # { item_name: [ location, location, ...]}
     # print("Levels: ", level_dict)
     victory_location = levels_list[world.options.goal_level.value]
 
-    # TODO: You... know the rules
     for loc in level_dict:
         # { atom: "BLAH", level: "BLAH", ranks: ["BLAH", "BLAH"] }
         atom_unlocked = Has(level_dict[loc]["atom"] + " Key")

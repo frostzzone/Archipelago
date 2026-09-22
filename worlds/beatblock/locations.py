@@ -13,7 +13,9 @@ if TYPE_CHECKING:
 from .options import Ranksanity, TargetRank, Fishsanity
 
 # Replace amount_of_fish with actual fish_list when it is implemented
-from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish, GAME
+from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish, GAME, fish_list
+
+# TODO: custom levels... maybe "Utils.parse_yaml"??
 
 # Buh, levles
 level_dict = {} # { location_name: { atom_name: "BLAH" , checks: [ Check, Check, ...]}}
@@ -59,8 +61,12 @@ def create_location_list() -> None:
     #         counter += 1
 
     # Fish
-    for i in range(1, amount_of_fish + 1):
-        location_name = f"Catch {i} Fish"
+    # for i in range(1, amount_of_fish + 1):
+        # NO NUMBERS
+        # location_name = f"Catch {i} Fish"
+    
+    for fish in fish_list:
+        location_name = f"Catch {fish}"
         fish_locations.append(location_name)
         LOCATION_TO_ID[location_name] = counter
         ID_TO_LOCATION[counter] = location_name
