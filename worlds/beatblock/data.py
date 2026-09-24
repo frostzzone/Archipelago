@@ -141,8 +141,8 @@ atom_list = [
     "Bounces",
     "Inverses",
     "Sides",
-    "Challenge",
-    "Extras",
+    "Fusion",
+    "Master",
     "Collab",
 ]
 

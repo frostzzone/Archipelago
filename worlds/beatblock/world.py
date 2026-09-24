@@ -10,7 +10,7 @@ from worlds.AutoWorld import World
 from . import items, locations, regions, rules#, web_world
 from . import options as beatblock_options
 
-from .data import game_name, origin_region, ranks_list
+from .data import game_name, origin_region, ranks_list, levels_list
 
 class BeatblockWorld(World):
     """
@@ -55,7 +55,7 @@ class BeatblockWorld(World):
         # Get of the custom levels here ig
 
         base_data = {
-            "goal_level": self.options.goal_level.value,
+            "goal_level": levels_list[self.options.goal_level.value],
             "death_link": bool(self.options.deathlink),
             "fishsanity": bool(self.options.fishsanity),
             "ranksanity": bool(self.options.ranksanity),
