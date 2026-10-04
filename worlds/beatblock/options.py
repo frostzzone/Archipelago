@@ -51,7 +51,7 @@ GoalLevel = make_dynamic_choice("GoalLevel", levels_list, "Goal Level", "Era Chi
 The final level needed before go Mode
 """)
 
-GoalRank = make_dynamic_choice("GoalRank", ranks_list, "Goal Rank", "s", """
+GoalRank = make_dynamic_choice("GoalRank", ranks_list, "Goal Rank", "a plus", """
 The Rank needed to beat the goal level
 """)
 
