@@ -124,7 +124,7 @@ def create_regular_locations(world: BeatblockWorld) -> None:
 
     game_region.add_locations(level_location_ids, BeatblockLocation)
     
-    if world.options.fishsanity:
+    if world.options.fishsanity.value:
         fishing_room = world.get_region("Fishing")
         fish_location_ids = get_location_names_with_ids(fish_locations)
         fishing_room.add_locations(fish_location_ids, BeatblockLocation)

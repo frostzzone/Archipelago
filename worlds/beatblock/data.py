@@ -4,8 +4,8 @@ origin_region = "game"
 
 GAME = {
     "Intro" : [
-        "Tutorial",
-        "Shinamon No Neko",
+        "Tutorial", #You start with this anyways because the game demands it
+        "Shinamon no Neko",
         "Move Right Along!",
         "so stressed!",
         "Rhythmic Shield",
@@ -37,7 +37,7 @@ GAME = {
         "Triplet Test",
         "Destroy, Destroy (ft. eili)",
     ],
-    "Challenge" : [
+    "Fusion" : [
         "Lawrence",
         "Heated Battle! ~ Disco Bakery",
         "C-ミ B-ミ",
@@ -46,12 +46,12 @@ GAME = {
         "Fragmented Existence",
         ":))))",
     ],
-    "Extras" : [
+    "Master" : [
         "DAMOCLISM",
         "+ERABY+E CONNEC+10N",
         "NISENEN",
         "Novena",
-        "What's a Keygen?",
+        "what's a keygen?", # THIS IS LOWERCASE BECAUSE STOOPID
         "Era Chimaera",
     ],
     "Collab" : [
@@ -68,83 +68,91 @@ GAME = {
     # ]
 }
 
-# Case sensitive to the ingame one
 levels_list = [
-
-    # Introspections Atom
-    
-    "Tutorial",
-    "Shinamon No Neko",
-    "Move Right Along!",
-    "so stressed!",
-    "Rhythmic Shield",
-    
-    # Mines Atom
-    "Through the Static",
-    "Gritted Strings",
-    "BLOW A FUSE",
-    "Femme Fatale",
-    "Take A Number (Polished Gem Mix)",
-    
-    # Bounces Atom
-    "Night Echo (Future Funk Mix)",
-    "Ladybug Castle",
-    "Cache",
-    "BEATROCK (get it?)",
-    
-    # Inverses Atom
-    "Cobblestone Counterpoint",
-    "Island of Orchids",
-    "selfportrait",
-    "UNDO UNDO",
-    "ILOVEYOU.vbs",
-    
-    # Sides Atom
-    "publico cautivo",
-    "3-Bit Bebop",
-    "AU CONTRAIRE",
-    "Triplet Test",
-    "Destroy, Destroy (ft. eili)",
-    
-    # Challenge Atom
-    "Lawrence",
-    "Heated Battle! ~ Disco Bakery",
-    "C-ミ B-ミ",
-    "Omelette Cafe By Road 38",
-    "cloud factory",
-    "Fragmented Existence",
-    ":))))",
-    
-    # Extras Atom
-    "DAMOCLISM",
-    "+ERABY+E CONNEC+10N",
-    "NISENEN",
-    "Novena",
-    "what's a keygen?", # THIS IS LOWERCASE BECAUSE STOOPID
-    "Era Chimaera",
-    
-    # Collab Atom
-    "Code Remix",
-    "Lucky Break",
-    "Empty Diary",
-    "Spin Cycle",
-    "heptagramme",
-    "Recollection (ft. Risa Kodaka)",
-    
-    # Freeplay
-    # "gone fishin'"
+    level
+    for atom_levels in GAME.values()
+    for level in atom_levels
 ]
 
-atom_list = [
-    "Tutorial",
-    "Mines",
-    "Bounces",
-    "Inverses",
-    "Sides",
-    "Fusion",
-    "Master",
-    "Collab",
-]
+atom_list = list(GAME.keys())
+
+# Case sensitive to the ingame one
+# levels_list = [
+
+#     # Introspections Atom
+    
+#     "Tutorial",
+#     "Shinamon No Neko",
+#     "Move Right Along!",
+#     "so stressed!",
+#     "Rhythmic Shield",
+    
+#     # Mines Atom
+#     "Through the Static",
+#     "Gritted Strings",
+#     "BLOW A FUSE",
+#     "Femme Fatale",
+#     "Take A Number (Polished Gem Mix)",
+    
+#     # Bounces Atom
+#     "Night Echo (Future Funk Mix)",
+#     "Ladybug Castle",
+#     "Cache",
+#     "BEATROCK (get it?)",
+    
+#     # Inverses Atom
+#     "Cobblestone Counterpoint",
+#     "Island of Orchids",
+#     "selfportrait",
+#     "UNDO UNDO",
+#     "ILOVEYOU.vbs",
+    
+#     # Sides Atom
+#     "publico cautivo",
+#     "3-Bit Bebop",
+#     "AU CONTRAIRE",
+#     "Triplet Test",
+#     "Destroy, Destroy (ft. eili)",
+    
+#     # Fusion Atom
+#     "Lawrence",
+#     "Heated Battle! ~ Disco Bakery",
+#     "C-ミ B-ミ",
+#     "Omelette Cafe By Road 38",
+#     "cloud factory",
+#     "Fragmented Existence",
+#     ":))))",
+    
+#     # Master Atom
+#     "DAMOCLISM",
+#     "+ERABY+E CONNEC+10N",
+#     "NISENEN",
+#     "Novena",
+#     "what's a keygen?", # THIS IS LOWERCASE BECAUSE STOOPID
+#     "Era Chimaera",
+    
+#     # Collab Atom
+#     "Code Remix",
+#     "Lucky Break",
+#     "Empty Diary",
+#     "Spin Cycle",
+#     "heptagramme",
+#     "Recollection (ft. Risa Kodaka)",
+    
+#     # Freeplay
+#     # "gone fishin'"
+# ]
+
+# atom_list = [
+#     "Tutorial",
+#     "Mines",
+#     "Bounces",
+#     "Inverses",
+#     "Sides",
+#     "Fusion",
+#     "Master",
+#     "Collab",
+# ]
 
 costumes_list = [
 	# "random",

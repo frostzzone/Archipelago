@@ -22,39 +22,48 @@ def set_all_rules(world: BeatblockWorld) -> None:
 def set_all_entrance_rules(world: BeatblockWorld) -> None:
     # Theres NOT only the fish entrance 
 
-    Intro_atom = world.get_region("Intro")
-    world.set_rule(Intro_atom, Has("Intro Key"))
+    for atom in GAME:
+        print("Adding atom key for: ", atom)
+        region = world.get_region(atom)
+        world.set_rule(region, Has(f"{atom} Key"))
 
-    Mines_atom = world.get_region("Mines")
-    world.set_rule(Mines_atom, Has("Mines Key"))
-
-    Bounces_atom = world.get_region("Bounces")
-    world.set_rule(Bounces_atom, Has("Bounces Key"))
-
-    Inverses_atom = world.get_region("Inverses")
-    world.set_rule(Inverses_atom, Has("Inverses Key"))
-
-    Sides_atom = world.get_region("Sides")
-    world.set_rule(Sides_atom, Has("Sides Key"))
-
-    Challenge_atom = world.get_region("Challenge")
-    world.set_rule(Challenge_atom, Has("Challenge Key"))
-
-    Extras_atom = world.get_region("Extras")
-    world.set_rule(Extras_atom, Has("Extras Key"))
-
-    Collab_atom = world.get_region("Collab")
-    world.set_rule(Collab_atom, Has("Collab Key"))
-
-    if world.options.fishsanity:
+    if world.options.fishsanity.value:
         fishing_room = world.get_entrance("fishing special")
-        can_fish = Has("Fishing Rod")
-        world.set_rule(fishing_room, can_fish)
+        world.set_rule(fishing_room, Has("Fishing Rod"))
+
+    # Intro_atom = world.get_region("Intro")
+    # world.set_rule(Intro_atom, Has("Intro Key"))
+
+    # Mines_atom = world.get_region("Mines")
+    # world.set_rule(Mines_atom, Has("Mines Key"))
+
+    # Bounces_atom = world.get_region("Bounces")
+    # world.set_rule(Bounces_atom, Has("Bounces Key"))
+
+    # Inverses_atom = world.get_region("Inverses")
+    # world.set_rule(Inverses_atom, Has("Inverses Key"))
+
+    # Sides_atom = world.get_region("Sides")
+    # world.set_rule(Sides_atom, Has("Sides Key"))
+
+    # Fusion_atom = world.get_region("Fusion")
+    # world.set_rule(Fusion_atom, Has("Fusion Key"))
+
+    # Master_atom = world.get_region("Master")
+    # world.set_rule(Master_atom, Has("Master Key"))
+
+    # Collab_atom = world.get_region("Collab")
+    # world.set_rule(Collab_atom, Has("Collab Key"))
+
+    # if world.options.fishsanity.value:
+    #     fishing_room = world.get_entrance("fishing special")
+    #     can_fish = Has("Fishing Rod")
+    #     world.set_rule(fishing_room, can_fish)
 
 def set_all_location_rules(world: BeatblockWorld) -> None:
     # THE PAIN OF STUPID LOOKING CODE
 
-    # NOT TODO: Add multi level completion condition ( Extra Atom Unlocks )
+    # NOT TODO: Add multi level completion condition ( Master Atom Unlocks )
     # Levels location rules
 
     ### Level dictionary
@@ -69,7 +78,15 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
 
         for rank in level_dict[loc]["ranks"]:
             location = world.get_location(rank)
-            world.set_rule(location, atom_unlocked & level_unlocked)
+            # if tutorial ranks, they dont need anything
+            if loc == "Tutorial":
+                print("Tutorial rank | ", rank)
+                world.set_rule(location, lambda state: True)
+            else:
+                world.set_rule(location, atom_unlocked & level_unlocked)
+        
+        if loc == "Tutorial":
+            location.item_rule = lambda item: item.name != "Fishing Rod"
             
     
 
@@ -85,7 +102,7 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
     #         )
     
     # Fish location rules
-    if world.options.fishsanity:
+    if world.options.fishsanity.value:
         for location_name in fish_locations:
             location = world.get_location(location_name)
             world.set_rule(location, Has("Fishing Rod"))

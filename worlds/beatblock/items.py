@@ -38,11 +38,15 @@ def create_item_list() -> None:
     atom_counter = 1000
 
     for atom in GAME:
+        print(f"{atom}: {len(GAME[atom])} levels")
         add_key(atom + " Key", atom_counter)
         atom_counter += 1
         # BLAHAAHGAHJAJA
         for item in GAME[atom]:
-            add_item(item, level_counter)
+            if item == "Tutorial":
+                print("Skipping tutorial")
+                continue
+            add_item(item, level_counter, ItemClassification.progression)
             level_counter += 1
 
     # counter = 100
@@ -79,15 +83,27 @@ def create_item_with_correct_classification(world: BeatblockWorld, name: str) ->
 
     return BeatblockItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
-def create_all_items(world: BeatblocktWorld) -> None:
-    STARTING_ITEM = world.random.choice(levels_list)
+def create_all_items(world: BeatblockWorld) -> None:
+    STARTING_ATOM = world.random.choice(atom_list)
+
+    # make sure level cant be tutorial
+    atom_levels = [
+        level
+        for level in GAME[STARTING_ATOM]
+        if level != "Tutorial"
+    ]
+
+    STARTING_LEVEL = world.random.choice(atom_levels)
+
+    print("Starting atom:", STARTING_ATOM)
+    print("Starting level:", STARTING_LEVEL)
 
     itempool: list[Item] = []
 
     # TODO: RANDOMIZE THE FISHTIGNH RONGFV
-    if world.options.fishsanity.value:
-        world.push_precollected(world.create_item("Fishing Rod"))
-        # itempool.append(world.create_item("Fishing Rod"))
+    # if world.options.fishsanity.value:
+    #     world.push_precollected(world.create_item("Fishing Rod"))
+    #     # itempool.append(world.create_item("Fishing Rod"))
 
     starting_item = None
     for item in ITEM_NAME_TO_ID:
@@ -96,7 +112,7 @@ def create_all_items(world: BeatblocktWorld) -> None:
             print("skipping fishing rod")
             continue
 
-        if item == STARTING_ITEM:
+        if item == STARTING_ATOM + " Key" or item == STARTING_LEVEL:
             starting_item = world.create_item(item)
             world.push_precollected(starting_item)
             continue
