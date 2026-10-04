@@ -48,23 +48,6 @@ def create_location_list() -> None:
                 ID_TO_LOCATION[counter] = location_name
                 counter += 1
     
-
-
-    # for loc in levels_list:
-    #      # Rank checks
-    #     for rank in ranks_list:
-    #         location_name = f"{loc} Get {rank} Rank"
-    #         rank_locations.append(location_name)
-
-    #         LOCATION_TO_ID[location_name] = counter
-    #         ID_TO_LOCATION[counter] = location_name
-    #         counter += 1
-
-    # Fish
-    # for i in range(1, amount_of_fish + 1):
-        # NO NUMBERS
-        # location_name = f"Catch {i} Fish"
-    
     for fish in fish_list:
         location_name = f"Catch {fish}"
         fish_locations.append(location_name)
@@ -133,4 +116,4 @@ def create_events(world: BeatblockWorld) -> None:
     # Add completion event
     game_region = world.get_region(origin_region)
 
-    game_region.add_event(levels_list[world.options.goal_level.value] + " (B- or Above)", "Victory", location_type=BeatblockLocation, item_type=items.BeatblockItem)
+    game_region.add_event(levels_list[world.options.goal_level.value] + " Get " + ranks_list[world.options.goal_rank.value], "Victory", location_type=BeatblockLocation, item_type=items.BeatblockItem)

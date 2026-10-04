@@ -2,6 +2,7 @@ game_name = "Beatblockapelago"
 
 origin_region = "game"
 
+# Level names are case sensitive
 GAME = {
     "Intro" : [
         "Tutorial", #You start with this anyways because the game demands it
@@ -68,91 +69,15 @@ GAME = {
     # ]
 }
 
+# Exclude tutorial?
 levels_list = [
     level
     for atom_levels in GAME.values()
     for level in atom_levels
+    if level != "Tutorial"
 ]
 
 atom_list = list(GAME.keys())
-
-# Case sensitive to the ingame one
-# levels_list = [
-
-#     # Introspections Atom
-    
-#     "Tutorial",
-#     "Shinamon No Neko",
-#     "Move Right Along!",
-#     "so stressed!",
-#     "Rhythmic Shield",
-    
-#     # Mines Atom
-#     "Through the Static",
-#     "Gritted Strings",
-#     "BLOW A FUSE",
-#     "Femme Fatale",
-#     "Take A Number (Polished Gem Mix)",
-    
-#     # Bounces Atom
-#     "Night Echo (Future Funk Mix)",
-#     "Ladybug Castle",
-#     "Cache",
-#     "BEATROCK (get it?)",
-    
-#     # Inverses Atom
-#     "Cobblestone Counterpoint",
-#     "Island of Orchids",
-#     "selfportrait",
-#     "UNDO UNDO",
-#     "ILOVEYOU.vbs",
-    
-#     # Sides Atom
-#     "publico cautivo",
-#     "3-Bit Bebop",
-#     "AU CONTRAIRE",
-#     "Triplet Test",
-#     "Destroy, Destroy (ft. eili)",
-    
-#     # Fusion Atom
-#     "Lawrence",
-#     "Heated Battle! ~ Disco Bakery",
-#     "C-ミ B-ミ",
-#     "Omelette Cafe By Road 38",
-#     "cloud factory",
-#     "Fragmented Existence",
-#     ":))))",
-    
-#     # Master Atom
-#     "DAMOCLISM",
-#     "+ERABY+E CONNEC+10N",
-#     "NISENEN",
-#     "Novena",
-#     "what's a keygen?", # THIS IS LOWERCASE BECAUSE STOOPID
-#     "Era Chimaera",
-    
-#     # Collab Atom
-#     "Code Remix",
-#     "Lucky Break",
-#     "Empty Diary",
-#     "Spin Cycle",
-#     "heptagramme",
-#     "Recollection (ft. Risa Kodaka)",
-    
-#     # Freeplay
-#     # "gone fishin'"
-# ]
-
-# atom_list = [
-#     "Tutorial",
-#     "Mines",
-#     "Bounces",
-#     "Inverses",
-#     "Sides",
-#     "Fusion",
-#     "Master",
-#     "Collab",
-# ]
 
 costumes_list = [
 	# "random",

@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .world import BeatblockWorld
 
 from .options import Fishsanity
-from .data import levels_list, game_name, atom_list, GAME
+from .data import game_name, atom_list, GAME
 
 STARTING_ITEM = ""
 ITEM_NAME_TO_ID = {}
@@ -38,32 +38,16 @@ def create_item_list() -> None:
     atom_counter = 1000
 
     for atom in GAME:
-        print(f"{atom}: {len(GAME[atom])} levels")
+        # print(f"{atom}: {len(GAME[atom])} levels")
         add_key(atom + " Key", atom_counter)
         atom_counter += 1
         # BLAHAAHGAHJAJA
         for item in GAME[atom]:
             if item == "Tutorial":
-                print("Skipping tutorial")
+                # print("Skipping tutorial")
                 continue
             add_item(item, level_counter, ItemClassification.progression)
             level_counter += 1
-
-    # counter = 100
-    # for i, item in enumerate(levels_list):
-    #     add_item(item, counter)
-    #     counter += 1
-    
-    # counter = 1000
-    # for i, item in enumerate(atom_list):
-    #     add_item(item, counter)
-    #     counter += 1
-
-# NO FISH ITEM STUPID ME
-# def create_item_list_add_fish(world: BeatblockWorld) -> None:
-#     counter = 100 + len(levels_list)
-#     # Fish :drool:
-#     if world.options.fishsanity.value:
         
 
 create_item_list()
@@ -95,8 +79,8 @@ def create_all_items(world: BeatblockWorld) -> None:
 
     STARTING_LEVEL = world.random.choice(atom_levels)
 
-    print("Starting atom:", STARTING_ATOM)
-    print("Starting level:", STARTING_LEVEL)
+    # print("Starting atom:", STARTING_ATOM)
+    # print("Starting level:", STARTING_LEVEL)
 
     itempool: list[Item] = []
 
@@ -109,7 +93,7 @@ def create_all_items(world: BeatblockWorld) -> None:
     for item in ITEM_NAME_TO_ID:
         # Ignore fishing rod if fishsanity is off
         if not world.options.fishsanity.value and item == "Fishing Rod":
-            print("skipping fishing rod")
+            # print("skipping fishing rod")
             continue
 
         if item == STARTING_ATOM + " Key" or item == STARTING_LEVEL:

@@ -56,6 +56,7 @@ class BeatblockWorld(World):
 
         base_data = {
             "goal_level": levels_list[self.options.goal_level.value],
+            "goal_rank": ranks_list[self.options.goal_rank.value],
             "death_link": bool(self.options.deathlink),
             "fishsanity": bool(self.options.fishsanity),
             "ranksanity": bool(self.options.ranksanity),

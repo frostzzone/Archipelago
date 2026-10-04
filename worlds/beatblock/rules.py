@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
-from .data import origin_region, levels_list, GAME
+from .data import origin_region, levels_list, ranks_list, GAME
 
 from .locations import level_dict, fish_locations
 
@@ -23,7 +23,7 @@ def set_all_entrance_rules(world: BeatblockWorld) -> None:
     # Theres NOT only the fish entrance 
 
     for atom in GAME:
-        print("Adding atom key for: ", atom)
+        # print("Adding atom key for: ", atom)
         region = world.get_region(atom)
         world.set_rule(region, Has(f"{atom} Key"))
 
@@ -70,6 +70,7 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
     # { item_name: [ location, location, ...]}
     # print("Levels: ", level_dict)
     victory_location = levels_list[world.options.goal_level.value]
+    victory_rank = ranks_list[world.options.goal_rank.value]
 
     for loc in level_dict:
         # { atom: "BLAH", level: "BLAH", ranks: ["BLAH", "BLAH"] }
@@ -78,9 +79,9 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
 
         for rank in level_dict[loc]["ranks"]:
             location = world.get_location(rank)
-            # if tutorial ranks, they dont need anything
+            # if tutorial ranks, they dont need anything so unlocked by default
             if loc == "Tutorial":
-                print("Tutorial rank | ", rank)
+                # print("Tutorial rank | ", rank)
                 world.set_rule(location, lambda state: True)
             else:
                 world.set_rule(location, atom_unlocked & level_unlocked)
@@ -109,7 +110,7 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
 
     can_complete_game = Has(victory_location)
 
-    final_level = world.get_location(victory_location + " (B- or Above)")
+    final_level = world.get_location(victory_location + " Get " + victory_rank)
     world.set_rule(final_level, can_complete_game)
 
 def set_completion_condition(world: BeatblockWorld) -> None:

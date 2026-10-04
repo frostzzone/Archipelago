@@ -42,13 +42,17 @@ class Ranksanity(Toggle):
     display_name = "Ranksanity"
 
 
-TargetRank = make_dynamic_choice("TargetRank", ranks_list, "Target Rank", "S", """
+TargetRank = make_dynamic_choice("TargetRank", ranks_list, "Target Rank", "s", """
 The minimum target rank for checks
 Will be ignored if ranksanity is on
 """)
 
 GoalLevel = make_dynamic_choice("GoalLevel", levels_list, "Goal Level", "Era Chimaera", """
 The final level needed before go Mode
+""")
+
+GoalRank = make_dynamic_choice("GoalRank", ranks_list, "Goal Rank", "s", """
+The Rank needed to beat the goal level
 """)
 
 class CustomLevels(OptionDict):
@@ -70,12 +74,13 @@ class BeatblockOptions(PerGameCommonOptions):
     ranksanity: Ranksanity
     target_rank: TargetRank
     goal_level: GoalLevel
+    goal_rank: GoalRank
     custom_levels: CustomLevels
 
 option_groups = [
         OptionGroup(
             "Gameplay Options",
-            [DeathLink, TargetRank, GoalLevel, Ranksanity, Fishsanity],
+            [DeathLink, TargetRank, GoalLevel, GoalRank, Ranksanity, Fishsanity],
         )
 ]
 
@@ -86,6 +91,7 @@ option_presets = {
         "ranksanity": False,
         "target_rank": "s",
         "goal_level": "era_chimaera",
+        "goal_rank": "s",
         "custom_levels": {
             "#comment": "Not implemented yet",
             "#comment2": "any level with a # in front of it will be ignored",
