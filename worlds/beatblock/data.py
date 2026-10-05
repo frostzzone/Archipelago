@@ -41,7 +41,7 @@ GAME = {
     "Fusion" : [
         "Lawrence",
         "Heated Battle! ~ Disco Bakery",
-        "C-ミ B-ミ",
+        "C-me B-me",
         "Omelette Cafe By Road 38",
         "cloud factory",
         "Fragmented Existence",
