@@ -10,7 +10,7 @@ from worlds.AutoWorld import World
 from . import items, locations, regions, rules#, web_world
 from . import options as beatblock_options
 
-from .data import game_name, origin_region, ranks_list, levels_list
+from .data import game_name, origin_region, ranks_list, levels_list, marathons, achivement_list, tangent_list
 
 class BeatblockWorld(World):
     """
@@ -55,12 +55,27 @@ class BeatblockWorld(World):
         # Get of the custom levels here ig
 
         base_data = {
+            "death_link": bool(self.options.deathlink),
+
+            "target_rank": ranks_list[self.options.target_rank.value],
             "goal_level": levels_list[self.options.goal_level.value],
             "goal_rank": ranks_list[self.options.goal_rank.value],
-            "death_link": bool(self.options.deathlink),
-            "fishsanity": bool(self.options.fishsanity),
+
             "ranksanity": bool(self.options.ranksanity),
-            "target_rank": ranks_list[self.options.target_rank.value],
+            "impossible_ranks": bool(self.options.impossible_ranks),
+
+            "fishsanity": bool(self.options.fishsanity),
+
+            "marathonsanity": bool(self.options.marathonsanity),
+            "marathons": json.dumps(marathons),
+
+            "achievementsanity": bool(self.options.achievements),
+            "ladybug": bool(self.options.ladybug),
+            "achievements": json.dumps(achivement_list),
+
+            "tangents": json.dumps(tangent_list),
+
+
             "locations": json.dumps(locations.LOCATION_TO_ID),
             "items": json.dumps(items.ITEM_ID_TO_NAME),
 

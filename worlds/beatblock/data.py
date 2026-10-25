@@ -69,7 +69,7 @@ GAME = {
     # ]
 }
 
-# Exclude tutorial?
+# Exclude tutorial
 levels_list = [
     level
     for atom_levels in GAME.values()
@@ -78,6 +78,81 @@ levels_list = [
 ]
 
 atom_list = list(GAME.keys())
+
+# Marathons
+# Sad that im too stupid to automate the levels and atoms
+marathons = {
+    "Back to Basics": {
+        "atoms": [
+            "Intro",
+            "Mines",
+            "Sides",
+            "Bounces",
+            "Inverses"
+        ],
+        "levels": [
+            "Tutorial",
+            "Through the Static",
+            "publico cautivo",
+            "Night Echo (Future Funk Mix)",
+            "Cobblestone Counterpoint"
+        ]
+    },
+    "Boss Rush!": {
+        "atoms": [
+            "Intro",
+            "Sides",
+            "Inverses",
+            "Bounces",
+            "Mines",
+            "Master"
+        ],
+        "levels": [
+            "Rhythmic Shield",
+            "Destroy, Destroy (ft. eili)",
+            "ILOVEYOU.vbs",
+            "BEATROCK (get it?)",
+            "BLOW A FUSE",
+            "Novena"
+        ]
+    },
+    "The Demo Disc": {
+        "atoms": [
+            "Mines",
+            "Intro",
+            "Sides",
+            "Collab",
+            "Inverses",
+            "Fusion",
+            "Master"
+        ],
+        "levels": [
+            "Gritted Strings",
+            "so stressed!",
+            "publico cautivo",
+            "Code Remix",
+            "ILOVEYOU.vbs",
+            "Lawrence",
+            "+ERABY+E CONNEC+10N"
+        ]
+    }
+}
+
+tangent_list = [
+    "ILOVEYOU.vbs",
+    "3-Bit Bebop",
+    "Destroy, Destroy (ft. eili)"
+]
+
+achivement_list = [
+    "sorry",
+    "not sorry",
+    "perfect score",
+    "ladybug castle",
+    "awesome beats blocked quick",
+    "comedy area",
+    "why should crowns worry"
+]
 
 costumes_list = [
 	# "random",
@@ -184,19 +259,18 @@ fish_list = [
 
 ranks_list = [
     "p",
-    "s plus",
-    "s",
-    "a plus",
-    "a",
-    "b plus",
-    "b",
-    "b minus",
-    "c plus",
-    "c",
-    "c minus",
-    "d plus",
-    "d",
-    "d minus",
+    "s plus", "s",
+    "a plus", "a",
+    "b plus", "b", "b minus",
+    "c plus", "c", "c minus",
+    "d plus", "d", "d minus",
+    "f",
+]
+
+damoclism_ranks = [
+    "p",
+    "s plus", "s",
+    "a plus", "a",
     "f",
 ]
 

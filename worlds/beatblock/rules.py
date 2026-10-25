@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
-from .data import origin_region, levels_list, ranks_list, GAME
+from .data import origin_region, levels_list, ranks_list, GAME, marathons, tangent_list, achivement_list
 
 from .locations import level_dict, fish_locations
 
@@ -107,6 +107,50 @@ def set_all_location_rules(world: BeatblockWorld) -> None:
         for location_name in fish_locations:
             location = world.get_location(location_name)
             world.set_rule(location, Has("Fishing Rod"))
+    
+    # Marathon location rules
+    if world.options.marathonsanity.value:
+        for marathon in marathons:
+            m = marathons[marathon]
+            marathon_location = world.get_location(f"Marathon {marathon}")
+
+            hasThings = None
+            # Atoms keys
+            for atom in m["atoms"]:
+                if hasThings is not None:
+                    hasThings = hasThings & Has(f"{atom} Key")
+                else:
+                    hasThings = Has(f"{atom} Key")
+
+            # Levels
+            for level in m["levels"]:
+                hasThings = hasThings & Has(level)
+
+
+    # Achievements edge cases
+    if world.options.achievements.value:
+        for achivement in achivement_list:
+            # Skip it...
+            if achivement == "ladybug castle" and not world.options.ladybug.value:
+                continue
+
+            achivement_location = world.get_location(f"Achievement {achivement}")
+
+            if achivement == "ladybug castle" and world.options.ladybug.value:
+                world.set_rule(achivement_location, Has("Ladybug Castle"))
+            elif achivement == "why should crowns worry":
+                world.set_rule(achivement_location, Has("DAMOCLISM"))
+            elif achivement == "comedy area":
+                hasComedy = None
+                for tangent in tangent_list:
+                    if hasComedy is None:
+                        hasComedy = Has(tangent)
+                    else:
+                        hasComedy = hasComedy | Has(tangent)
+                        
+                
+                world.set_rule(achivement_location, hasComedy)
+
 
     can_complete_game = Has(victory_location)
 

@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .world import BeatblockWorld
 
 from .options import Fishsanity
-from .data import game_name, atom_list, GAME
+from .data import game_name, atom_list, GAME, levels_list
 
 STARTING_ITEM = ""
 ITEM_NAME_TO_ID = {}
@@ -70,11 +70,11 @@ def create_item_with_correct_classification(world: BeatblockWorld, name: str) ->
 def create_all_items(world: BeatblockWorld) -> None:
     STARTING_ATOM = world.random.choice(atom_list)
 
-    # make sure level cant be tutorial
+    # make sure level cant be tutorial OR the goal level
     atom_levels = [
         level
         for level in GAME[STARTING_ATOM]
-        if level != "Tutorial"
+        if level != "Tutorial" or level != levels_list[world.options.goal_level.value]
     ]
 
     STARTING_LEVEL = world.random.choice(atom_levels)

@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 from .options import Ranksanity, TargetRank, Fishsanity
 
 # Replace amount_of_fish with actual fish_list when it is implemented
-from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish, GAME, fish_list
+from .data import game_name, origin_region, levels_list, ranks_list, amount_of_fish, GAME, fish_list, marathons, achivement_list, damoclism_ranks
 
 # TODO: custom levels... maybe "Utils.parse_yaml"??
 
@@ -23,6 +23,8 @@ level_dict = {} # { location_name: { atom_name: "BLAH" , checks: [ Check, Check,
 # Every location registered
 rank_locations = {}
 fish_locations: list[str] = []
+marathon_locations: list[str] = []
+achievement_locations: list[str] = []
 
 LOCATION_TO_ID = {}
 # for simplicity on the client side
@@ -54,6 +56,21 @@ def create_location_list() -> None:
         LOCATION_TO_ID[location_name] = counter
         ID_TO_LOCATION[counter] = location_name
         counter += 1
+    
+    for marathon in marathons:
+        location_name = f"Marathon {marathon}"
+        marathon_locations.append(location_name)
+        LOCATION_TO_ID[location_name] = counter
+        ID_TO_LOCATION[counter] = location_name
+        counter += 1
+
+    for achivement in achivement_list:
+        location_name = f"Achievement {achivement}"
+        achievement_locations.append(location_name)
+        LOCATION_TO_ID[location_name] = counter
+        ID_TO_LOCATION[counter] = location_name
+        counter += 1
+    
 
 def create_level_locations(world: BeatblockWorld) -> None:
     # Levels
@@ -69,13 +86,19 @@ def create_level_locations(world: BeatblockWorld) -> None:
             # Regex ig ues
             match = re.search(r"^(.*?) Get (.*?) Rank$", rank)
 
+            level = match.group(1)
             rank_letter = match.group(2)
         
             if not loc in level_dict:
                 level_dict[loc] = { "atom": rank_locations[loc]["atom"], "level": rank_locations[loc]["level"], "ranks": [] }
 
+            # Ranksanity
             if world.options.ranksanity.value == True:
-                level_dict[loc]["ranks"].append(rank)
+                if level == "DAMOCLISM" and not world.options.impossible_ranks.value:
+                    if rank_letter in damoclism_ranks:
+                        level_dict[loc]["ranks"].append(rank)
+                else:
+                    level_dict[loc]["ranks"].append(rank)
             elif world.options.ranksanity.value == False and rank_letter == target_rank:
                 level_dict[loc]["ranks"].append(rank)
 
@@ -107,10 +130,29 @@ def create_regular_locations(world: BeatblockWorld) -> None:
 
     game_region.add_locations(level_location_ids, BeatblockLocation)
     
+    # Fishsanity checks
     if world.options.fishsanity.value:
         fishing_room = world.get_region("Fishing")
         fish_location_ids = get_location_names_with_ids(fish_locations)
         fishing_room.add_locations(fish_location_ids, BeatblockLocation)
+    
+    # Marathon checks
+    if world.options.marathonsanity.value:
+        for marathon in marathons:
+            print("Adding marathon: " + marathon)
+            marathon_location_ids = get_location_names_with_ids([f"Marathon {marathon}"])
+            game_region.add_locations(marathon_location_ids, BeatblockLocation)
+
+    # Achievement checks
+    if world.options.achievements.value:
+        for achivement in achivement_list:
+            print("Adding achievement: " + achivement)
+            # TODO add achievement locations
+            if achivement == "ladybug castle" and not world.options.ladybug.value:
+                continue
+            achievement_location_id = get_location_names_with_ids([f"Achievement {achivement}"])
+            game_region.add_locations(achievement_location_id, BeatblockLocation)
+
         
 def create_events(world: BeatblockWorld) -> None:
     # Add completion event
